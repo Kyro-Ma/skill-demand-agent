@@ -3,7 +3,7 @@ param(
     [string]$ManifestPath = "",
     [string]$Version = "0.1.0",
     [string]$RenamedVersion = "0.1.1",
-    [string]$Tags = "generated,skill-demand-agent",
+    [string]$Tags = "generated,skill-foundry",
     [int]$MaxAttempts = 68
 )
 

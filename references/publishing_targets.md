@@ -38,7 +38,7 @@ Requirements:
 
 - Set `GITHUB_TOKEN` or `GH_TOKEN` with repository contents write permission.
 - Use `--publish-github-branch` when the target branch is not `main`.
-- Use `--publish-github-prefix` to change the repository folder prefix. The default is `skill-demand-agent-runs/<run-id>/`.
+- Use `--publish-github-prefix` to change the repository folder prefix. The default is `skill-foundry-runs/<run-id>/`.
 
 The runner uploads:
 

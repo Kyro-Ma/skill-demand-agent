@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Discover recent user needs online and turn them into reviewed Codex skills."""
+"""Discover recent user needs online and turn them into reviewed skills."""
 
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ from typing import Any
 
 UTC = dt.timezone.utc
 MAX_WORKERS = 10
-USER_AGENT = "skill-demand-agent/1.0 (+https://openai.com/codex)"
+USER_AGENT = "skill-foundry/1.0"
 SIMILARITY_DEDUPE_THRESHOLD = 0.72
 CLAW_HUB_SKILLS_API = "https://clawhub.ai/api/v1/skills"
 CLAW_HUB_SKILL_PAGE = "https://clawhub.ai/skills/{slug}"
@@ -2030,7 +2030,7 @@ Trigger sentences:
 
 ## Files
 
-- `SKILL.md`: English Codex-valid skill instructions.
+- `SKILL.md`: English skill instructions.
 - `SKILL.zh-CN.md`: Chinese skill instructions.
 - `README.md`: English user-facing guide.
 - `README.zh-CN.md`: Chinese user-facing guide.
@@ -2077,7 +2077,7 @@ def render_readme_md_zh(plan: SkillPlan) -> str:
 
 ## 文件
 
-- `SKILL.md`：英文版 Codex 有效技能说明。
+- `SKILL.md`：英文版技能说明。
 - `SKILL.zh-CN.md`：中文版技能说明。
 - `README.md`：英文版用户说明。
 - `README.zh-CN.md`：中文版用户说明。
@@ -2463,7 +2463,7 @@ def publish_to_github(repo: str, branch: str, prefix: str, files: list[tuple[Pat
         ]
     clean_prefix = prefix.strip("/").replace("\\", "/")
     results: list[dict[str, Any]] = []
-    message = f"Publish skill-demand-agent run {run_id}"
+    message = f"Publish SkillFoundry run {run_id}"
     for local_path, remote_name in files:
         remote_path = f"{clean_prefix}/{run_id}/{remote_name}" if clean_prefix else f"{run_id}/{remote_name}"
         try:
@@ -2576,7 +2576,7 @@ def render_catalog(
 """
         )
     notes = "\n".join(f"- {note}" for note in discovery_notes)
-    return f"""# Skill Demand Agent Catalog
+    return f"""# SkillFoundry Catalog
 
 Generated: {generated_at}
 
@@ -2666,7 +2666,7 @@ Minimum evidence: {min_evidence} separate source signals.
 
 def parse_args() -> argparse.Namespace:
     workspace_default = Path(__file__).resolve().parents[2]
-    parser = argparse.ArgumentParser(description="Discover live user needs and generate reviewed Codex skills.")
+    parser = argparse.ArgumentParser(description="Discover live user needs and generate reviewed skills.")
     parser.add_argument("--days", type=int, default=14, help="Lookback window for online discovery.")
     parser.add_argument("--per-source-limit", type=int, default=60, help="Approximate source fetch limit.")
     parser.add_argument("--max-ideas", type=int, default=10, help="Number of ideas to implement. Use 0 for all.")
@@ -2685,7 +2685,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--clawhub-version", default="", help="Optional version to pass to `clawhub skill publish --version`.")
     parser.add_argument("--publish-github-repo", default=os.environ.get("SKILL_DEMAND_GITHUB_REPO", ""), help="GitHub repository in owner/repo form for publishing generated skills.")
     parser.add_argument("--publish-github-branch", default=os.environ.get("SKILL_DEMAND_GITHUB_BRANCH", "main"), help="GitHub branch to update when publishing.")
-    parser.add_argument("--publish-github-prefix", default=os.environ.get("SKILL_DEMAND_GITHUB_PREFIX", "skill-demand-agent-runs"), help="Repository folder prefix for published run artifacts.")
+    parser.add_argument("--publish-github-prefix", default=os.environ.get("SKILL_DEMAND_GITHUB_PREFIX", "skill-foundry-runs"), help="Repository folder prefix for published run artifacts.")
     return parser.parse_args()
 
 
