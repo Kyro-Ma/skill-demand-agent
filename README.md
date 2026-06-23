@@ -1,5 +1,5 @@
 <p align="right">
-  <a href="./README_ch.md">English</a> | <strong>简体中文</strong>
+  <a href="./README.md">English</a> | <a href="./README_ch.md">简体中文</a>
 </p>
 
 # SkillFoundry
